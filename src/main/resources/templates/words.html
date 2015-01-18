@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Words</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    <h1>Words</h1>
+    <table border="1">
+        <tr>
+            <th>Word</th>
+            <th>Translations</th>
+            <th>Actions</th>
+        </tr>
+        <tr th:each="word : ${words}">
+          <td th:text="${word.getWord()}"></td>
+          <td>
+            <table>
+                <tr th:each="translation : ${word.getTranslations()}">
+                    <td th:text="${translation}"></td>
+                </tr>
+            </table>
+          </td>
+          <td>
+              <a th:href="@{|/word/${word.word}/translation/add|}">
+                  Add translation
+              </a>
+              <br/>
+              <a th:href="@{|/word/${word.word}/translation/delete|}">
+                  Delete translations
+              </a>
+              <br/>
+              <a th:href="@{|/word/${word.word}/delete|}">
+                  Delete word
+              </a>
+          </td>
+        </tr>
+    </table>
+    <a href="/word/add">
+        Add word
+    </a>
+</body>
+</html>

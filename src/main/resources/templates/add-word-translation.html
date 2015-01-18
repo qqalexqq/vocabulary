@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add translation</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h1>Add translation</h1>
+<form th:object="${word}" method="POST" th:action="@{|/word/${word.word}/translation/add|}">
+    Word: <span th:text="${word.word}"></span>
+    <br/>
+    Translation: <input type="text" name="translation"/>
+    <br/>
+    <button type="submit">Add translation</button>
+</form>
+</body>
+</html>
