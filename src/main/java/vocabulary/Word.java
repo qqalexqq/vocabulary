@@ -1,18 +1,19 @@
 package vocabulary;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-
+// Basically here we use Mongo as just a key-value storage although it's actually a document-based database.
 @Document(collection = "words")
 public class Word {
     @Id
     private String word;
 
-    private List<String> translations;
+    private List<String> translations = new ArrayList<String>();
 
     public Word() {}
 
@@ -24,10 +25,8 @@ public class Word {
         this.word = word.toLowerCase();
 
         for (String translation : translations) {
-            translation = translation.toLowerCase();
+            this.translations.add(translation.toLowerCase());
         }
-
-        this.translations = translations;
     }
 
     public String getWord() {
