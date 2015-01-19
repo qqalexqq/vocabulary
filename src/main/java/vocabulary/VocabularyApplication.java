@@ -53,25 +53,21 @@ public class VocabularyApplication {
     }
 
     @RequestMapping(value = "/word/{word}/delete", method = RequestMethod.GET)
-    public String deleteWord(@PathVariable("word") String word) {
+    public String deleteWord(@PathVariable("word") Word word) {
         repository.delete(word);
 
         return "redirect:/";
     }
 
     @RequestMapping(value = "/word/{word}/translation/add", method = RequestMethod.GET)
-    public String addWordTranslation(@PathVariable("word") String wordName, Model model) {
-        Word word = repository.findOne(wordName);
-
+    public String addWordTranslation(@PathVariable("word") Word word, Model model) {
         model.addAttribute("word", word);
 
         return "add-word-translation";
     }
 
     @RequestMapping(value = "/word/{word}/translation/add", method = RequestMethod.POST)
-    public String addWordTranslationPOST(@PathVariable("word") String wordName, @RequestParam String translation) {
-        Word word = repository.findOne(wordName);
-
+    public String addWordTranslationPOST(@PathVariable("word") Word word, @RequestParam String translation) {
         word.addTranslation(translation);
 
         repository.save(word);
@@ -80,9 +76,7 @@ public class VocabularyApplication {
     }
 
     @RequestMapping(value = "/word/{word}/translation/delete", method = RequestMethod.GET)
-    public String deleteWordTranslations(@PathVariable("word") String wordName) {
-        Word word = repository.findOne(wordName);
-
+    public String deleteWordTranslations(@PathVariable("word") Word word) {
         word.deleteTranslations();
 
         repository.save(word);
